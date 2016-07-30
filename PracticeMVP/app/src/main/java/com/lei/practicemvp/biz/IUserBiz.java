@@ -5,4 +5,5 @@ package com.lei.practicemvp.biz;
  */
 public interface IUserBiz {
     void login(String username, String password, OnLoginListener loginListener);
+    void register(String username,String password,OnRegisterListener registerListener);
 }

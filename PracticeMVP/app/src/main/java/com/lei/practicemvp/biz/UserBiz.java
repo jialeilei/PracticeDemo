@@ -35,5 +35,32 @@ public class UserBiz implements IUserBiz {
             }
         }.start();
     }
-    
+
+
+    @Override
+    public void register(final String username, final String password, final OnRegisterListener registerListener) {
+        //插入数据库
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                //模拟登录成功
+                if ("zhy".equals(username) && "123".equals(password))
+                {
+                    User user = new User();
+                    user.setUserName(username);
+                    user.setPassWord(password);
+                    registerListener.registerSuccess(user);
+                } else
+                {
+                    registerListener.registerFailed();
+                }
+            }
+        }.start();
+    }
 }

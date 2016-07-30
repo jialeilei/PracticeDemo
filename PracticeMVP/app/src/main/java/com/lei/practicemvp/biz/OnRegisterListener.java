@@ -5,10 +5,10 @@ import com.lei.practicemvp.bean.User;
 /**
  * Created by CCC on 2016/7/30.
  */
-public interface OnLoginListener {
+public interface OnRegisterListener {
 
-    void loginSuccess(User user);
+    void registerSuccess(User user);
 
-    void loginFailed();
+    void registerFailed();
 
 }
