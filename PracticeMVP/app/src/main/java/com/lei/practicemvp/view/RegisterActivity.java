@@ -1,5 +1,6 @@
 package com.lei.practicemvp.view;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +10,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.lei.practicemvp.R;
 import com.lei.practicemvp.bean.User;
+import com.lei.practicemvp.presenter.RegisterPresenter;
 import com.lei.practicemvp.presenter.UserLoginPresenter;
+import com.lei.practicemvp.view.register.IUserRegisterView;
 
-public class RegisterActivity extends AppCompatActivity implements IUserLoginView{
+public class RegisterActivity extends Activity implements IUserRegisterView{
     private EditText mEtUsername, mEtPassword;
     private Button mBtnLogin, mBtnClear;
     private ProgressBar mPbLoading;
-    private UserLoginPresenter mUserLoginPresenter = new UserLoginPresenter(this);
+    private RegisterPresenter mUserLoginPresenter = new RegisterPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity implements IUserLoginVie
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mUserLoginPresenter.login();
+                mUserLoginPresenter.register();
             }
         });
 
@@ -83,7 +86,12 @@ public class RegisterActivity extends AppCompatActivity implements IUserLoginVie
     }
 
     @Override
-    public void showFailedError() {
+    public void showFailedMessage() {
         Toast.makeText(RegisterActivity.this,"fail",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showSuccessMessage() {
+        Toast.makeText(RegisterActivity.this, "success", Toast.LENGTH_LONG).show();
     }
 }
