@@ -1,4 +1,4 @@
-package com.lei.practicemvp.view.register;
+package com.lei.practicemvp.user.view.register;
 
 import com.lei.practicemvp.bean.User;
 

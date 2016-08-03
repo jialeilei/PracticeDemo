@@ -1,4 +1,4 @@
-package com.lei.practicemvp.biz;
+package com.lei.practicemvp.user;
 
 /**
  * Created by CCC on 2016/7/30.

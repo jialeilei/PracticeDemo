@@ -1,4 +1,4 @@
-package com.lei.practicemvp.view.login;
+package com.lei.practicemvp.user.view.login;
 
 import com.lei.practicemvp.bean.User;
 

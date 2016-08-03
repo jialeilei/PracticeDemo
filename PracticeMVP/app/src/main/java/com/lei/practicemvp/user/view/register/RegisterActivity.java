@@ -1,40 +1,35 @@
-package com.lei.practicemvp.view.login;
+package com.lei.practicemvp.user.view.register;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
+
 import com.lei.practicemvp.R;
 import com.lei.practicemvp.bean.User;
-import com.lei.practicemvp.presenter.LoginPresenter;
-import com.lei.practicemvp.view.register.RegisterActivity;
+import com.lei.practicemvp.user.presenter.RegisterPresenter;
 
-public class LoginActivity extends AppCompatActivity implements IUserLoginView,View.OnClickListener{
-    private static String TAG="LoginActivity";
+public class RegisterActivity extends AppCompatActivity implements IUserRegisterView ,View.OnClickListener{
+
+    private static String TAG="RegisterActivity";
     private EditText mEtUsername, mEtPassword;
-    private Button mBtnLogin, mBtnClear;
-    private TextView mTvRegister;
+    private Button mBtnRegister, mBtnClear;
     private ProgressBar mPbLoading;
-    private LoginPresenter mUserLoginPresenter = new LoginPresenter(this);
+    private RegisterPresenter mRegisterPresenter = new RegisterPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         initView();
     }
 
     private void initView(){
-        mTvRegister=(TextView)findViewById(R.id.tvRegister);
-        mTvRegister.setOnClickListener(this);
-        mBtnLogin=(Button)findViewById(R.id.btnLogin);
-        mBtnLogin.setOnClickListener(this);
+        mBtnRegister=(Button)findViewById(R.id.btnRegister);
+        mBtnRegister.setOnClickListener(this);
         mBtnClear=(Button)findViewById(R.id.btnClear);
         mBtnClear.setOnClickListener(this);
         mEtUsername=(EditText)findViewById(R.id.etName);
@@ -45,16 +40,13 @@ public class LoginActivity extends AppCompatActivity implements IUserLoginView,V
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btnLogin:
-                mUserLoginPresenter.login();
+            case R.id.btnRegister:
+                mRegisterPresenter.register();
                 break;
             case R.id.btnClear:
-                mUserLoginPresenter.clear();
+                mRegisterPresenter.clear();
                 break;
-            case R.id.tvRegister:
-                Log.i(TAG, "onClick: ");
-                mUserLoginPresenter.toJump();
-                break;
+
         }
     }
 
@@ -90,17 +82,16 @@ public class LoginActivity extends AppCompatActivity implements IUserLoginView,V
 
     @Override
     public void toMainActivity(User user) {
-        Toast.makeText(LoginActivity.this,"success",Toast.LENGTH_LONG).show();
+
     }
 
     @Override
-    public void showFailedError() {
-        Toast.makeText(LoginActivity.this,"fail",Toast.LENGTH_LONG).show();
+    public void showFailedMessage() {
+        Toast.makeText(RegisterActivity.this,"fail",Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void toRegisterActivity() {
-        Intent intent=new Intent(LoginActivity.this, RegisterActivity.class);
-        startActivity(intent);
+    public void showSuccessMessage() {
+        Toast.makeText(RegisterActivity.this,"success",Toast.LENGTH_LONG).show();
     }
 }

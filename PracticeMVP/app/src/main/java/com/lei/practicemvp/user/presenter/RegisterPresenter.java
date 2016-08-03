@@ -1,12 +1,12 @@
-package com.lei.practicemvp.presenter;
+package com.lei.practicemvp.user.presenter;
 
 
 import android.os.Handler;
 import com.lei.practicemvp.bean.User;
-import com.lei.practicemvp.biz.IUserBiz;
-import com.lei.practicemvp.biz.OnRegisterListener;
-import com.lei.practicemvp.biz.UserBiz;
-import com.lei.practicemvp.view.register.IUserRegisterView;
+import com.lei.practicemvp.user.IUserBiz;
+import com.lei.practicemvp.user.OnRegisterListener;
+import com.lei.practicemvp.user.UserBiz;
+import com.lei.practicemvp.user.view.register.IUserRegisterView;
 
 /**
  * Created by CCC on 2016/7/30.

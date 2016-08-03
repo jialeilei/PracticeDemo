@@ -1,4 +1,4 @@
-package com.lei.practicemvp.biz;
+package com.lei.practicemvp.user;
 
 import com.lei.practicemvp.bean.User;
 

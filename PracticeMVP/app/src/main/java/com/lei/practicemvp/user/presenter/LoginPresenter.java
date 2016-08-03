@@ -1,23 +1,23 @@
-package com.lei.practicemvp.presenter;
+package com.lei.practicemvp.user.presenter;
 
 import android.os.Handler;
 
 import com.lei.practicemvp.bean.User;
-import com.lei.practicemvp.biz.IUserBiz;
-import com.lei.practicemvp.biz.OnLoginListener;
-import com.lei.practicemvp.biz.UserBiz;
-import com.lei.practicemvp.view.IUserLoginView;
+import com.lei.practicemvp.user.IUserBiz;
+import com.lei.practicemvp.user.OnLoginListener;
+import com.lei.practicemvp.user.UserBiz;
+import com.lei.practicemvp.user.view.login.IUserLoginView;
 
 /**
  * Created by CCC on 2016/7/30.
  */
-public class UserLoginPresenter {
+public class LoginPresenter {
 
     private IUserBiz userBiz;
     private IUserLoginView userLoginView;
     private Handler mHandler = new Handler();
 
-    public UserLoginPresenter(IUserLoginView iUserLoginView){
+    public LoginPresenter(IUserLoginView iUserLoginView){
         this.userLoginView=iUserLoginView;
         this.userBiz=new UserBiz();
     }
@@ -61,7 +61,7 @@ public class UserLoginPresenter {
         userLoginView.clearUserName();
     }
 
-    public void toRegister(){
+    public void toJump(){
         userLoginView.toRegisterActivity();
     }
 
