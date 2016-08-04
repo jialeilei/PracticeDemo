@@ -37,6 +37,7 @@ public class RegisterPresenter {
                     public void run() {
                         userRegisterView.showSuccessMessage();
                         userRegisterView.hideLoading();
+                        userRegisterView.toLoginActivity();
                     }
                 });
 

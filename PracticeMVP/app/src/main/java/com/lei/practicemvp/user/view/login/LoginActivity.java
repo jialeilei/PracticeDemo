@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.lei.practicemvp.R;
 import com.lei.practicemvp.bean.User;
+import com.lei.practicemvp.main.MainActivity;
 import com.lei.practicemvp.user.presenter.LoginPresenter;
 import com.lei.practicemvp.user.view.register.RegisterActivity;
 
@@ -46,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements IUserLoginView,V
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnLogin:
-                mUserLoginPresenter.login();
+                mUserLoginPresenter.login(this);
                 break;
             case R.id.btnClear:
                 mUserLoginPresenter.clear();
@@ -89,8 +90,11 @@ public class LoginActivity extends AppCompatActivity implements IUserLoginView,V
     }
 
     @Override
-    public void toMainActivity(User user) {
+    public void toMainActivity() {
         Toast.makeText(LoginActivity.this,"success",Toast.LENGTH_LONG).show();
+        Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
     @Override

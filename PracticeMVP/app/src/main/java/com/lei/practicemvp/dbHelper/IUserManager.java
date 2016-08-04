@@ -13,5 +13,4 @@ public interface IUserManager {
 
     List<User> getUser(String username);
 
-    boolean checkUser(String username);
 }

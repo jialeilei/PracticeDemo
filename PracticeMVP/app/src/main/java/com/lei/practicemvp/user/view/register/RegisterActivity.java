@@ -8,10 +8,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.lei.practicemvp.R;
-import com.lei.practicemvp.bean.User;
-import com.lei.practicemvp.dbHelper.UserManager;
 import com.lei.practicemvp.user.presenter.RegisterPresenter;
-import com.lei.practicemvp.util.LogTools;
+
 
 public class RegisterActivity extends Activity implements IUserRegisterView ,View.OnClickListener{
 
@@ -19,7 +17,7 @@ public class RegisterActivity extends Activity implements IUserRegisterView ,Vie
     private Button mBtnRegister, mBtnClear;
     private ProgressBar mPbLoading;
     private RegisterPresenter mRegisterPresenter = new RegisterPresenter(this);
-    public UserManager mUserManager=new UserManager(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +45,6 @@ public class RegisterActivity extends Activity implements IUserRegisterView ,Vie
             case R.id.btnClear:
                 mRegisterPresenter.clear();
                 break;
-
         }
     }
 
@@ -82,7 +79,9 @@ public class RegisterActivity extends Activity implements IUserRegisterView ,Vie
     }
 
     @Override
-    public void toMainActivity(User user) {}
+    public void toLoginActivity() {
+        this.finish();
+    }
 
     @Override
     public void showFailedMessage() {

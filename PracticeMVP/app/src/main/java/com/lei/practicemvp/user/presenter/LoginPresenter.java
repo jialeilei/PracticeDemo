@@ -1,5 +1,6 @@
 package com.lei.practicemvp.user.presenter;
 
+import android.content.Context;
 import android.os.Handler;
 
 import com.lei.practicemvp.bean.User;
@@ -22,19 +23,19 @@ public class LoginPresenter {
         this.userBiz=new UserBiz();
     }
 
-    public void login(){
+    public void login(Context context){
         userLoginView.showLoading();
-        userBiz.login(userLoginView.getUserName(), userLoginView.getPassword(), new OnLoginListener() {
+        userBiz.login(context,userLoginView.getUserName(), userLoginView.getPassword(), new OnLoginListener() {
             @Override
-            public void loginSuccess(final User user) {
+            public void loginSuccess() {
                 //需要在UI线程执行
                 mHandler.post(new Runnable()
                 {
                     @Override
                     public void run()
                     {
-                        userLoginView.toMainActivity(user);
                         userLoginView.hideLoading();
+                        userLoginView.toMainActivity();
                     }
                 });
             }

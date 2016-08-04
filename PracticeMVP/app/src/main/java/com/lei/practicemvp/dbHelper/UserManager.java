@@ -20,7 +20,6 @@ public class UserManager implements IUserManager{
 
     public UserManager(Context context){
         mContext=context;
-        //dbHelper=new DataBaseHelper(mContext);
         dbHelper=new DataBaseHelper(mContext,"user.db",null,1);
     }
 
@@ -32,7 +31,6 @@ public class UserManager implements IUserManager{
         values.put("password", password);
         db.insert("user", null, values);
         db.close();
-
         LogTools.logLei("insert  user success");
     }
 
@@ -52,17 +50,5 @@ public class UserManager implements IUserManager{
         return users;
     }
 
-    @Override
-    public boolean checkUser(String username) {
-        boolean result=false;
-        SQLiteDatabase db=dbHelper.getReadableDatabase();
-        Cursor cursor=db.query("user",null," username=? ",new String[]{String.valueOf(username)},null,null,null);
-        while (cursor.moveToNext()){
-           result=true;
-        }
-        cursor.close();
-        db.close();
-        return result;
-    }
 
 }

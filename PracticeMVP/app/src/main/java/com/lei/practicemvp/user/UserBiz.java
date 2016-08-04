@@ -1,10 +1,8 @@
 package com.lei.practicemvp.user;
 
 import android.content.Context;
-
 import com.lei.practicemvp.bean.User;
 import com.lei.practicemvp.dbHelper.UserManager;
-import com.lei.practicemvp.user.view.register.RegisterActivity;
 import com.lei.practicemvp.util.LogTools;
 
 
@@ -16,7 +14,7 @@ public class UserBiz implements IUserBiz {
     UserManager mUserManager;
 
     @Override
-    public void login(final String username, final String password, final OnLoginListener loginListener) {
+    public void login(final Context context,final String username, final String password, final OnLoginListener loginListener) {
         //模拟子线程耗时操作
         new Thread()
         {
@@ -30,15 +28,16 @@ public class UserBiz implements IUserBiz {
                 {
                     e.printStackTrace();
                 }
-                //模拟登录成功
-                if ("zhy".equals(username) && "123".equals(password))
-                {
-                    User user = new User(username,password);
-                    loginListener.loginSuccess(user);
-                } else
-                {
+
+                mUserManager=new UserManager(context);
+                if (mUserManager.getUser(username).size()>0){
+                    if (mUserManager.getUser(username).get(0).getPassWord().equals(password)){
+                        loginListener.loginSuccess();
+                    }
+                }else {
                     loginListener.loginFailed();
                 }
+
             }
         }.start();
     }

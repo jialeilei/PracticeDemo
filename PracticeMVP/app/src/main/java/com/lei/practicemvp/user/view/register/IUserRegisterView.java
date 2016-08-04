@@ -19,7 +19,7 @@ public interface IUserRegisterView {
 
     void hideLoading();
 
-    void toMainActivity(User user);
+    void toLoginActivity();
 
     void showFailedMessage();
 

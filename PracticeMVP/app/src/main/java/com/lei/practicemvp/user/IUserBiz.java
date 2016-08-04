@@ -7,7 +7,7 @@ import android.content.Context;
  */
 public interface IUserBiz {
 
-    void login(String username, String password, OnLoginListener loginListener);
+    void login(Context context,String username, String password, OnLoginListener loginListener);
 
     void register(Context context,String username,String password,OnRegisterListener registerListener);
 
