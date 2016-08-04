@@ -7,7 +7,7 @@ import com.lei.practicemvp.bean.User;
  */
 public interface OnRegisterListener {
 
-    void registerSuccess(User user);
+    void registerSuccess();
 
     void registerFailed();
 

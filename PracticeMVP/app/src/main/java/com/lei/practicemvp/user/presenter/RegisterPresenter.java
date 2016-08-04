@@ -1,8 +1,7 @@
 package com.lei.practicemvp.user.presenter;
 
-
+import android.content.Context;
 import android.os.Handler;
-import com.lei.practicemvp.bean.User;
 import com.lei.practicemvp.user.IUserBiz;
 import com.lei.practicemvp.user.OnRegisterListener;
 import com.lei.practicemvp.user.UserBiz;
@@ -27,16 +26,17 @@ public class RegisterPresenter {
         userRegisterView.clearUserName();
     }
 
-    public void register(){
+    public void register(Context context){
         userRegisterView.showLoading();
-        userBiz.register(userRegisterView.getUserName(), userRegisterView.getPassword(), new OnRegisterListener() {
+        userBiz.register(context,userRegisterView.getUserName(), userRegisterView.getPassword(), new OnRegisterListener() {
             @Override
-            public void registerSuccess(User user) {
+            public void registerSuccess() {
                 //需要在UI线程执行
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         userRegisterView.showSuccessMessage();
+                        userRegisterView.hideLoading();
                     }
                 });
 
@@ -48,6 +48,7 @@ public class RegisterPresenter {
                     @Override
                     public void run() {
                         userRegisterView.showFailedMessage();
+                        userRegisterView.hideLoading();
                     }
                 });
             }

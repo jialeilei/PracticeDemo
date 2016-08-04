@@ -1,24 +1,25 @@
 package com.lei.practicemvp.user.view.register;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.lei.practicemvp.R;
 import com.lei.practicemvp.bean.User;
+import com.lei.practicemvp.dbHelper.UserManager;
 import com.lei.practicemvp.user.presenter.RegisterPresenter;
+import com.lei.practicemvp.util.LogTools;
 
-public class RegisterActivity extends AppCompatActivity implements IUserRegisterView ,View.OnClickListener{
+public class RegisterActivity extends Activity implements IUserRegisterView ,View.OnClickListener{
 
-    private static String TAG="RegisterActivity";
     private EditText mEtUsername, mEtPassword;
     private Button mBtnRegister, mBtnClear;
     private ProgressBar mPbLoading;
     private RegisterPresenter mRegisterPresenter = new RegisterPresenter(this);
+    public UserManager mUserManager=new UserManager(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements IUserRegister
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnRegister:
-                mRegisterPresenter.register();
+                mRegisterPresenter.register(this);
                 break;
             case R.id.btnClear:
                 mRegisterPresenter.clear();
@@ -81,17 +82,15 @@ public class RegisterActivity extends AppCompatActivity implements IUserRegister
     }
 
     @Override
-    public void toMainActivity(User user) {
-
-    }
+    public void toMainActivity(User user) {}
 
     @Override
     public void showFailedMessage() {
-        Toast.makeText(RegisterActivity.this,"fail",Toast.LENGTH_LONG).show();
+        Toast.makeText(RegisterActivity.this,"用户名已经存在",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showSuccessMessage() {
-        Toast.makeText(RegisterActivity.this,"success",Toast.LENGTH_LONG).show();
+        Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_LONG).show();
     }
 }
