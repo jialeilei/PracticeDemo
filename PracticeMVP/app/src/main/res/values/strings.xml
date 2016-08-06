@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PracticeMVP</string>
+    <color name="titleGreen">#9AFF9A</color>
+    <color name="white">#FFFFFF</color>
 </resources>

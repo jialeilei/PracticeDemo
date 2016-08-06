@@ -1,13 +1,14 @@
 package com.lei.practiceslidingmenu;
 
+import android.app.Activity;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener{
 
     private DrawerLayout mDrawerLayout;
     private TextView tvControl;
@@ -21,27 +22,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView(){
         tvControl=(TextView)findViewById(R.id.tvTest);
         tvControl.setOnClickListener(this);
-       /* mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
-        mDrawerLayout.get*/
+        mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
 
-
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tvTest:
-
+                mDrawerLayout.openDrawer(Gravity.LEFT);
                 break;
         }
     }
-
-    /*@Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        //If the nav drawer is open, hide action items related to the content view
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
-        returnsuper.onPrepareOptionsMenu(menu);
-    }*/
-
 }
+
