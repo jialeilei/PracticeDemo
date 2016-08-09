@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.lei.practicemvp.Constant.Constants;
 import com.lei.practicemvp.R;
 import com.lei.practicemvp.util.CircleImage;
@@ -30,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         initView();
     }
+
 
     private void initView(){
         //透明状态栏
