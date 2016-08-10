@@ -1,6 +1,12 @@
 package com.lei.practicemvp.main;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,11 +22,15 @@ import com.lei.practicemvp.Constant.Constants;
 import com.lei.practicemvp.R;
 import com.lei.practicemvp.util.CircleImage;
 
+import java.io.File;
+import java.text.MessageFormat;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener ,IMainView{
     private ImageView imgSlide;
     private DrawerLayout mDrawerLayout;
     private CircleImage imgHead;
     private TextView tvName;
+    private Uri imageUri;
     private MainPresenter mMainPresenter=new MainPresenter(this);
 
     @Override
@@ -62,6 +72,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvName.setText(Constants.USER_NAME);
     }
 
+    private void takePhoto(){
+        File outputImage = new File(Environment.getExternalStorageDirectory(),"output_image.jpg");
+        try{
+            if (outputImage.exists()){
+                outputImage.delete();
+            }
+            outputImage.createNewFile();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        imageUri = Uri.fromFile(outputImage);
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+        startActivityForResult(intent,1);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 1:
+                if (resultCode==RESULT_OK){
+                    Intent intent = new Intent("com.android.camera.action.CROP");
+                    intent.setDataAndType(imageUri,"image/*");
+                    intent.putExtra("scale", true);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                    startActivityForResult(intent,2);
+                }
+                break;
+            case 2:
+                if (resultCode==RESULT_OK){
+                    try {
+                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                        imgHead.setImageBitmap(bitmap);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            default:
+
+                break;
+        }
+    }
+
     private void chooseHeadDialog() {
         View  view = getLayoutInflater().inflate(R.layout.photo_choose_dialog, null);
         final Dialog dialog = new Dialog(MainActivity.this, R.style.transparentFrameWindowStyle);
@@ -92,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                takePhoto();
                 dialog.cancel();
             }
         });
