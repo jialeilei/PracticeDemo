@@ -1,46 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="true"
+    android:fitsSystemWindows="true"
     android:background="@color/titleGreen"
-    tools:context="com.lei.practicemvp.main.MainActivity">--><!--android:fitsSystemWindows="true"-->
+    tools:context="com.lei.practicemvp.main.MainActivity">
 
     <android.support.v4.widget.DrawerLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/drawer_layout"
         android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="true"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
+
         <!--content-->
         <LinearLayout
             android:id="@+id/main_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/titleGreen"
-            android:clipToPadding="true"
-            android:fitsSystemWindows="true"
             android:orientation="vertical">
 
-            <include layout="@layout/title_bar"/>
-            <LinearLayout
+            <include
+                layout="@layout/title_bar"/>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="main" />
-            </LinearLayout>
-
-
+                android:gravity="center"
+                android:text="main" />
         </LinearLayout>
 
         <!--left content-->
+
+
         <LinearLayout
             android:id="@+id/left_content"
             android:layout_width="240dp"
@@ -48,48 +42,15 @@
             android:layout_gravity="start"
             android:dividerHeight="0dp"
             android:background="#B0E2FF"
-            android:clipToPadding="true"
-            android:fitsSystemWindows="true"
             android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/rlHeaderContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp">
-                <com.lei.practicemvp.util.CircleImage
-                    android:id="@+id/imgHead"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="50dp"
-                    android:src="@mipmap/head_white"/>
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:layout_toRightOf="@+id/imgHead"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:text="name"/>
-                <TextView
-                    android:id="@+id/tvDetail"
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:layout_toRightOf="@+id/imgHead"
-                    android:layout_below="@+id/tvName"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:text="等级"/>
-            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="left" />
-
         </LinearLayout>
 
     </android.support.v4.widget.DrawerLayout>
 
-<!--</LinearLayout>-->
+</LinearLayout>

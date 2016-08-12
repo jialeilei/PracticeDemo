@@ -3,7 +3,6 @@ package com.lei.practicemvp.user.presenter;
 import android.content.Context;
 import android.os.Handler;
 
-import com.lei.practicemvp.Constant.Constants;
 import com.lei.practicemvp.bean.User;
 import com.lei.practicemvp.user.IUserBiz;
 import com.lei.practicemvp.user.OnLoginListener;
@@ -35,7 +34,6 @@ public class LoginPresenter {
                     @Override
                     public void run()
                     {
-                        Constants.USER_NAME=userLoginView.getUserName();
                         userLoginView.hideLoading();
                         userLoginView.toMainActivity();
                     }
