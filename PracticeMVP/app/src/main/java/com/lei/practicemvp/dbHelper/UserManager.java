@@ -31,7 +31,7 @@ public class UserManager implements IUserManager{
         values.put("password", password);
         db.insert("user", null, values);
         db.close();
-        LogTools.logLei("insert  user success");
+        LogTools.logLei(TAG,"insert  user success");
     }
 
     public List<User> getUser(String username){

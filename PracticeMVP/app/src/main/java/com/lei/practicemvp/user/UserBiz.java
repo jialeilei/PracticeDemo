@@ -1,7 +1,6 @@
 package com.lei.practicemvp.user;
 
 import android.content.Context;
-import com.lei.practicemvp.bean.User;
 import com.lei.practicemvp.dbHelper.UserManager;
 import com.lei.practicemvp.util.LogTools;
 
@@ -12,6 +11,7 @@ import com.lei.practicemvp.util.LogTools;
 public class UserBiz implements IUserBiz {
 
     UserManager mUserManager;
+    private final String TAG="UserBiz";
 
     @Override
     public void login(final Context context,final String username, final String password, final OnLoginListener loginListener) {
@@ -61,7 +61,7 @@ public class UserBiz implements IUserBiz {
                     registerListener.registerFailed();
                 }else {
                     mUserManager.insertUser(username,password);
-                    LogTools.logLei("username: "+username+" password: "+password);
+                    LogTools.logLei(TAG,"username: "+username+" password: "+password);
                     registerListener.registerSuccess();
                 }
 

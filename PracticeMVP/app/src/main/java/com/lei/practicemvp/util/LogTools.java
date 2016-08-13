@@ -10,9 +10,9 @@ public class LogTools {
 
     private static boolean showLog=true;
 
-    public static void logLei(String msg){
+    public static void logLei(String TAG,String msg){
         if (showLog){
-            Log.i("Lei", msg);
+            Log.i(TAG, msg);
         }
     }
 }
