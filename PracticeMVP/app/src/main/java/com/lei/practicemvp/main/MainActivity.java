@@ -23,8 +23,9 @@ import com.lei.practicemvp.R;
 import com.lei.practicemvp.util.CircleImage;
 import com.lei.practicemvp.util.Common;
 import com.lei.practicemvp.util.LogTools;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.text.MessageFormat;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener ,IMainView{
     private final String TAG="MainActivity";
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Uri imageUri;
     private MainPresenter mMainPresenter=new MainPresenter(this);
     private Common mCommon=new Common();
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,15 +109,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 2:
                 if (resultCode==RESULT_OK){
                     try {
+                        LogTools.logLei(TAG,"img uri: "+imageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
                         LogTools.logLei(TAG,"bitmap count: "+bitmap.getByteCount());
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        LogTools.logLei(TAG, "bitmap count byte: " + baos.toByteArray().length/1024);
 
-                        bitmap = mCommon.compressImage(BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri)));
-                        imgHead.setImageBitmap(bitmap);
-                        LogTools.logLei(TAG,"result bitmap count: "+bitmap.getByteCount());
+                        //Bitmap bitmap2 = mCommon.compressImage(bitmap);
+                        Bitmap bitmap2 = mCommon.comp(bitmap);
+                        imgHead.setImageBitmap(bitmap2);
+                        bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        LogTools.logLei(TAG,"result bitmap2 count: "
+                                +bitmap2.getByteCount()+" byte: "+baos.toByteArray().length/1024);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
+                    //imgHead.setImageResource(R.mipmap.icon);
                 }
                 break;
             default:
