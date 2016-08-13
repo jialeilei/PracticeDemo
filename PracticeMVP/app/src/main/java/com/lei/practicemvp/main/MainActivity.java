@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         LogTools.logLei(TAG, "bitmap count byte: " + baos.toByteArray().length/1024);
 
-                        //Bitmap bitmap2 = mCommon.compressImage(bitmap);
-                        Bitmap bitmap2 = mCommon.comp(bitmap);
+                        Bitmap bitmap2 = mCommon.compressImage(bitmap);
+                        //Bitmap bitmap2 = mCommon.comp(bitmap);
                         imgHead.setImageBitmap(bitmap2);
                         bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         LogTools.logLei(TAG,"result bitmap2 count: "
