@@ -13,10 +13,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private Context mContext;
     private final String TAG="DataBaseHelper";
 
-    public static final String CREATE_TABLE="create table user ("
-            +"id integer primary key autoincrement, "
-            +"username text, "
-            +"password text ) ";
+    public static final String CREATE_TABLE = "create table user (id integer primary key autoincrement, username text, password text ) ";
 
     public DataBaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -32,6 +29,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-
     }
+
 }
