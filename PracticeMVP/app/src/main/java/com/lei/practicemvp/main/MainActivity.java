@@ -1,16 +1,12 @@
 package com.lei.practicemvp.main;
 
-import android.annotation.TargetApi;
 import android.app.Dialog;
-import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -23,11 +19,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.lei.practicemvp.Constant.Constants;
 import com.lei.practicemvp.R;
 import com.lei.practicemvp.util.CircleImage;
@@ -178,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         try {
             FileOutputStream fos = new FileOutputStream(outputImage);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fos);
             fos.flush();
             fos.close();
             return Uri.fromFile(outputImage);
