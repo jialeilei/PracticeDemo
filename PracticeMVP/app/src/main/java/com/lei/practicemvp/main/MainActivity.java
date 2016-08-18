@@ -3,6 +3,7 @@ package com.lei.practicemvp.main;
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -21,11 +22,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.lei.practicemvp.Constant.Constants;
 import com.lei.practicemvp.R;
+import com.lei.practicemvp.bean.Detail;
+import com.lei.practicemvp.dbHelper.BB;
 import com.lei.practicemvp.util.CircleImage;
 import com.lei.practicemvp.util.Common;
+import com.lei.practicemvp.util.LogTools;
+import org.xutils.DbManager;
+import org.xutils.ex.DbException;
+import org.xutils.x;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, IMainView {
     private final String TAG = "MainActivity";
@@ -37,12 +47,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainPresenter mMainPresenter = new MainPresenter(this);
     private Common mCommon = new Common();
     private Bitmap bitmap;
+    private TextView tvContent;
+    DbManager dbManager;
+    List<Detail> list = new ArrayList<Detail>();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbManager= x.getDb(BB.getDaoConfig());
+        //dbManager = x.getDb()
         initView();
     }
 
@@ -58,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgHead.setOnClickListener(this);
         tvName = (TextView) findViewById(R.id.tvName);
         mMainPresenter.showUserInfo();
+        tvContent = (TextView) findViewById(R.id.tvContent);
+        tvContent.setOnClickListener(this);
 
     }
 
@@ -69,6 +87,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.imgHead:
                 chooseHeadDialog();
+                break;
+            case R.id.tvContent:
+                Detail detail;
+                try {
+                    list.add(new Detail("wang",22));
+                    dbManager.save(list);
+                    LogTools.logLei(TAG, "save success ");
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
+
+
+                try {
+                    detail = dbManager.findFirst(Detail.class);
+                    tvContent.setText("name " + detail.getName() + " age: " + detail.getAge());
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            default:
                 break;
         }
     }
