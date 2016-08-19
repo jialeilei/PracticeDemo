@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +19,15 @@ public class GetNumber {
         Cursor cursor = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,null);
         String phoneNumber;
         String name;
-        while (cursor.moveToNext()){
-            phoneNumber = cursor.getColumnName(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            name = cursor.getColumnName(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-            list.add(new PhoneInfo(name,phoneNumber));
-            Log.i(TAG, "name: "+name+ " number: "+phoneNumber);
+        if (cursor !=null){
+            while (cursor.moveToNext()){
+                phoneNumber = cursor.getColumnName(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                name = cursor.getColumnName(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                list.add(new PhoneInfo(name,phoneNumber));
+                Log.i(TAG, "name: "+name+ " number: "+phoneNumber);
+            }
         }
+
         return null;
     }
 
